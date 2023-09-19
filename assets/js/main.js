@@ -197,11 +197,13 @@ const iconTheme = 'uil-sun';
 
 // Cached themes
 const selectedTheme = localStorage.getItem('selected-theme');
+// console.log(selectedTheme);
 const selectedIcon = localStorage.getItem('selected-icon');
+// console.log(selectedIcon);
 
 // Obtaining current theme by validating weather dark-theme is active or not
-const getCurrentTheme = () => document.body.classList.contains('darkTheme') ? 'dark' : 'light';
-const getCurrentIcon = () => themeButton.classList.contains('iconTheme') ? 'uil-moon' : 'uil-sun';
+const getCurrentTheme = () => document.body.classList.contains(darkTheme) ? 'dark' : 'light';
+const getCurrentIcon = () => themeButton.classList.contains(iconTheme) ? 'uil-moon' : 'uil-sun';
 
 // Validating weather user have selected theme previously 
 if (selectedTheme) {
@@ -213,9 +215,14 @@ if (selectedTheme) {
 // Activating or Deactivating theme manually via button
 themeButton.addEventListener('click',()=>{
     document.body.classList.toggle(darkTheme);
-    themeButton.classList.toggle(iconTheme);
-    
-
+    // themeButton.classList.toggle(iconTheme);
+    if (document.body.classList.contains(darkTheme)){
+        themeButton.classList.remove('uil-moon');
+        themeButton.classList.add('uil-sun');
+    }else{
+        themeButton.classList.remove('uil-sun');
+        themeButton.classList.add('uil-moon');
+    }
     // Saving chosen theme to local storage of browser for future visit
     localStorage.setItem('selected-theme', getCurrentTheme());
     localStorage.setItem('selected-icon', getCurrentIcon());
